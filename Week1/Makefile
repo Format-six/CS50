@@ -1,5 +1,6 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -I.
+CC := gcc
+CFLAGS := -Wall -Wextra -Werror -I. 
+LDLIBS := -lcs50
 
 # 获取命令行参数（排除clean）
 ARGS = $(filter-out clean,$(MAKECMDGOALS))
@@ -9,8 +10,8 @@ default: $(ARGS)
 
 # 单个文件编译：生成和源文件同名的可执行文件，不保留.o文件
 %: %.c
-	$(CC) $(CFLAGS) -c $< -o $@.o
-	$(CC) $@.o -o $@
+	$(CC) $(CFLAGS) -c $< -o $@.o 
+	$(CC) $@.o -o $@ $(LDLIBS)
 	rm -f $@.o
 	@echo "✓ 生成 $@"
 

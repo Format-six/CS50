@@ -10,22 +10,16 @@ int main()
     while (h < 0);
     for (int a = 1;a < h+1; a++)
     {
-        for(int b = h-a;b > 0 ;b--)
+        for(int b = 1;b < (2*h + 2) ;b++)
         {
-            printf(" ");
-        }
-        for(int c = a;c > 0;c--)
-        {
-            printf("#");
-        }
-        printf(" ");
-        for(int b = h-a;b > 0 ;b--)
-        {
-            printf("#");
-        }
-        for(int c = a;c > 0;c--)
-        {
-            printf(" ");
+            if( ( (b > (h-a)) && (b <= (h+a+1)) ) && (b != (h+1)) )
+            {
+                printf("#");
+            }
+            else
+            {
+                printf(" ");
+            }
         }
         printf("\n");
     }

@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",                            // 任务标签，必须和 launch.json 中的 preLaunchTask 一致
+            "type": "shell",
+            
+            //  关键：使用 gcc 编译器（你的文件是 .c）
+            "command": "gcc",
+            // 如果你的文件是 C++ (.cpp)，请改成 "command": "g++"
+            
+            "args": [
+                "-g",                                     // 生成调试信息（必须）
+                "${file}",                                // 当前打开的文件
+                "-o",                                     
+                "${fileDirname}/${fileBasenameNoExtension}", // 输出文件名（无后缀）
+                
+                // 在这里添加你需要的库 
+                "-lcs50",                                 // 链接 CS50 库
+                "-lm"                                     // 链接数学库（如果需要）
+                
+                // 如果库不在标准路径，需要加上 -L 参数
+                // "-L", "/path/to/your/library"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true                         // 设为默认编译任务
+            },
+            "problemMatcher": ["$gcc"]
+        }
+    ]
+}

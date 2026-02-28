@@ -1,0 +1,43 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) 调试",                       // 调试配置的名称，显示在下拉菜单中
+            "type": "cppdbg",                           // 调试器类型，C/C++都用这个
+            "request": "launch",                         // 请求类型：启动新程序
+            
+            // ⭐ 最关键：指定要调试的可执行文件路径
+            // 假设你的源文件是 Readability.c，编译后应生成 Readability
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            // 如果你的gcc默认生成 a.out，就改成 "program": "${fileDirname}/a.out"
+            
+            "args": [],                                  // 传递给程序的命令行参数，例如 ["arg1", "arg2"]
+            "stopAtEntry": false,                        // 是否在main函数入口处暂停（设为true便于单步调试）
+            "cwd": "${fileDirname}",                     // 程序运行时的当前工作目录
+            "environment": [],                            // 环境变量，一般用不到
+            
+            //  关键：如果使用了外部动态库（.so文件）且运行时报错找不到，在这里设置
+            // "environment": [
+            //     {
+            //         "name": "LD_LIBRARY_PATH",
+            //         "value": "/path/to/your/library:${workspaceFolder}"
+            //     }
+            // ],
+            
+            "externalConsole": false,                     // 是否弹出独立终端（false表示使用VSCode内置终端）
+            "MIMode": "gdb",                              // 使用gdb调试器
+            "miDebuggerPath": "/usr/bin/gdb",             // gdb的路径，通常不用改
+            "setupCommands": [                             // gdb美化打印设置
+                {
+                    "description": "为gdb启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            
+            // ⭐ 核心：调试前先执行编译任务，确保程序是最新的
+            // 这个值必须和 tasks.json 中的 "label" 完全一致
+            "preLaunchTask": "build"
+        }
+    ]
+}

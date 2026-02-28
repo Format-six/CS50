@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
-int Score(char *Word);
+int Score(string Word);
 
 int main()
 {
@@ -24,7 +24,7 @@ int main()
     return 0;
 }
 
-int Score(char *Word)
+int Score(string Word)
 {
     int score = 0,table[26] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
     for(int a=0,len = strlen(Word);a < len;a++)
